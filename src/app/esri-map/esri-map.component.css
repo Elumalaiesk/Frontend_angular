@@ -1,0 +1,168 @@
+/* import the required JSAPI css */
+@import url('https://js.arcgis.com/4.12/esri/css/main.css');
+
+.esri-view {
+  height: 850px;
+}
+
+body{
+  margin:0;
+  padding:0;
+  font-family:'montserrat';
+  background:#e3e9f7;
+}
+
+.logo{
+  padding:20px;
+}
+
+.side_nav{
+  margin:0;
+  padding:0;
+  height:100%;
+  width:260px;
+  position:fixed;
+  top:0;
+  right: 0;
+  background-color:#F8F9FA;
+}
+
+#dropdownMenuButton{
+  border: none;
+  color: #2b2626;
+}
+
+#dropdownMenuButton:hover {
+  background-color: #E1E1E1;
+  color: #2b2626;
+}
+
+#info{
+  background-color: #337AB7;
+  margin-top: 0px;
+  padding: 10px;
+  color: white;
+}
+
+.dark-modal .modal-content {
+  background-color: #292b2c;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+.light-blue-backdrop {
+  background-color: #5cb3fd;
+}
+
+.modal_bg {
+  color: #fff;
+  background-color: #337ab7;
+}
+
+.col_auto_1 {
+  display: flex;
+  white-space: nowrap;
+}
+
+.col_auto_2{
+  display: flex;
+}
+
+.col_auto_2 select {
+  font-size: 14px;
+  padding: 4px;
+  height: 40px;
+  width: 200px;
+}
+.navbar-brand{
+  color: #337ab7;
+  padding-left: 1%;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+:host ::ng-deep .legend {
+  background-color: #fff;
+  border-radius: 5px;
+  bottom: 30px;
+  left: 30px;
+  position: absolute;
+  z-index: 40;
+  padding: 10px;
+}
+
+:host ::ng-deep .legend-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+:host ::ng-deep .legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+:host ::ng-deep .legend-color {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+:host ::ng-deep .legend-label {
+  font-size: 14px;
+}
+
+:host ::ng-deep .color-bar {
+  width: 200px;
+  height: 20px;
+  background: linear-gradient(to right, #4575b4, #74add1, #abd9e9, #e0f3f8, #ffffbf, #fee090, #fdae61, #f46d43, #d73027, #a50026, #67001f);
+  margin-bottom: 10px;
+}
+
+#CSUNImg {
+  height: 70px; 
+  width: 70px;
+  margin: 0px 10px;
+}
+
+.navbar_title{
+  width: 100%;
+  float: left;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.logo_div{
+  display: flex;
+  justify-content: right;
+  margin-top: 88px;
+}
+
+#NCARImg{
+  height: 70px; 
+  width: 80px;
+  margin: 0px 10px;
+}
+
+#AuburnImg{
+  height: 65px; 
+  width: 65px;
+  margin: 0px 10px;
+}
+
+#usdaImg{
+  height: 73px; 
+  width: 70px;
+  margin: 0px 10px;
+}
+
+.container-fluid{
+  z-index: 99;
+}
+
+#CWSImg{
+  height: 65px; 
+  width: 130px;
+  margin: 0px 10px;
+}

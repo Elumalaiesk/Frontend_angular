@@ -1,0 +1,319 @@
+
+
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <img id="CSUNImg" src="/assets/images/CSUN_Seal.png" />
+        <img id="AuburnImg" src="/assets/images/Auburn.png" />
+        <img id="CWSImg" src="/assets/images/CWS_logo.png" />
+        <div class="navbar_title">
+          <a class="navbar-brand" href="#">Next Generation Interactive Soil Moisture Forecasting System (NG-ISMFS)</a>
+        </div>
+        <img id="usdaImg" src="/assets/images/usda.png" />
+        <img id="NCARImg" src="/assets/images/NCAR_logo.png" />
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="dropdownMenuButton" ngbDropdownToggle>Visualize</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                  <button ngbDropdownItem>Action</button>
+                  <button ngbDropdownItem>Another Action</button>
+                  <button ngbDropdownItem>Something else here</button>
+                </div>
+              </div>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="dropdownMenuButton" ngbDropdownToggle>About</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                  <button ngbDropdownItem>Action</button>
+                  <button ngbDropdownItem>Another Action</button>
+                  <button ngbDropdownItem>Something else here</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+    </nav>
+  </div>
+  <div #mapViewNode>
+    <div id="loadgif" *ngIf="show">
+      <img id="loadingImg" src="/assets/images/loading.gif" style="position:absolute; right:950px; top:300px; z-index:100; width: 75px;" />
+    </div>
+  </div>
+  <div class="side_nav">
+    <div class="logo_div">
+      
+    </div>
+    <div id="info">
+      <h4>Information</h4>
+    </div>
+    <div class="col-auto mt-5">
+      <form class="row g-3" #Ncar_date = "ngForm" (ngSubmit) = "onClickDate(Ncar_date)" >
+        <div>
+          <h3>Chart Section</h3>
+        </div>
+        <div class="col-auto">
+          <label for="start_date">Start date  :&nbsp;</label>
+          <input [(ngModel)]="Nc_dates" type="date" id="start_date" name="Nc_date"
+                value="2018-01-01"
+                min="1999-01-01" max="2021-12-31">
+        </div>
+        <!-- <div class="col-auto">
+          <label for="end_date">End date  :&nbsp;&nbsp;</label>
+          <input [(ngModel)]="Nc_end_dates" type="date" id="end_date" name="Nc_end_date"
+                value="2018-01-01"
+                min="1999-01-01" max="2018-12-31">
+        </div> -->
+        <div class="col-auto">
+          <input class="btn btn-primary mt-1" type = "submit" value = "Select">
+        </div>
+      </form>
+    </div>
+    <div class="p-3" id="loc" *ngIf="address != null">
+      <ul class="list-unstyled">
+        <li><strong>Address</strong> : {{address}}</li>
+        <li><strong>Latitude</strong> : {{latitude}}</li>
+        <li><strong>Longitude</strong> : {{longitude}}</li>
+      </ul>
+      <div  *ngIf="show_data">
+        <button (click)="getdata()" type="button" class="btn btn-primary text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Get Chart
+        </button>
+      </div>
+      <div  *ngIf="show_data_Note">
+        <p>Note: Select Date</p>
+      </div>
+    </div>
+    <div *ngIf="address == null">
+      <p class="text-center mt-5">Click to Get data</p>
+    </div>
+    <!-- <div ngbDropdown class="d-inline-block">
+      <label class="mt-1">Select :</label>
+      <button class="btn btn-outline-primary mb-1" id="dropdownMenuButton" ngbDropdownToggle>Week</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+        <button ngbDropdownItem>1st - 2nd Week</button>
+        <button ngbDropdownItem>3rd - 4th Week</button>
+      </div>
+    </div> -->
+    <form class="row g-3" #userWeek = "ngForm" (ngSubmit) = "onClickWeek(userWeek)">
+      <div>
+        <h3>Color Map Section</h3>
+        <h5>Select</h5>
+      </div>
+      <div class="col-auto">
+        <!-- <label for="start_date_col_map">Date  :&nbsp;</label>
+        <input [(ngModel)]="Nc_dates_col_map" type="date" id="start_date_col_map" name="Nc_date_col_map"
+              value="2018-01-01"
+              min="1999-01-01" max="2018-12-31"> -->
+        <div class="col_auto_2">
+          <!-- <label class="mt-1">Year </label>
+          <select [(ngModel)]="Nc_Year_col_map" name = "Nc_Year_col_map" class="form-select">
+            <option value="1999">1999</option>
+            <option value="2000">2000</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018" selected>2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+          </select>
+          <label class="mt-1">Month </label>
+          <select [(ngModel)]="Nc_Month_col_map" name= "Nc_Month_col_maps" class="form-select">
+            <option value="1" selected>January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select> -->
+        </div>
+      </div>
+      <div class="col-auto">
+        <label for="color_Map_date">Color Map date  :&nbsp;&nbsp;</label>
+        <input [(ngModel)]="Nc_color_Map_date" type="date" id="color_Map_date" name="Nc_color_Map_date"
+              value="2018-01-01"
+              min="1999-01-01" max="2021-12-31">
+      </div>
+      <div class="col_auto_1">
+        <label class="mt-1">Week :&nbsp;</label>
+        <select [(ngModel)]="Week" name = "WeekCount" class="form-select">
+          <option value="1" selected>1st - 2nd Week</option>
+          <option value="2">3rd - 4th Week</option>
+          <option value="3">5th - 6th Week</option>
+        </select>
+      </div>
+      <div>
+        <input class="btn btn-primary mt-1" type = "submit" value = "Rebuild">
+      </div>
+    </form>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header modal_bg">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Data Chart</h1>
+        <button (click)="destroyChart()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="loadgif" *ngIf="show">
+          <img id="loadingImg" src="/assets/images/loading.gif" style="position:absolute; right:550px; top:130px; z-index:100; width: 75px;" />
+        </div>
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button (click)="getdata()" class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">CESM2 vs ERA-5</button>
+            <button (click)="getneondata()" class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">CESM2 vs Neon vs ERA-5</button>
+            <!-- <button (click)="getReanalysisdata()" class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">ERA-5 vs MEERA-2</button> -->
+            <!-- <button (click)="getMeandata()" class="nav-link" id="nav-mean-tab" data-bs-toggle="tab" data-bs-target="#nav-mean" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Average Mean of Reanalysis Data</button> -->
+            <!-- <button (click)="getMeanNcardata()" class="nav-link" id="nav-mean-Ncar-tab" data-bs-toggle="tab" data-bs-target="#nav-mean-Ncar" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">NCAR vs Reanalysis Data</button> -->
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+            <!-- <div class="col">
+              <form class="row g-3" #userform = "ngForm" (ngSubmit) = "onClickSubmit(userform)" >
+                <div class="col-auto">
+                  <p>Select Soil Level</p>
+                  <select [(ngModel)]="Soil" name = "SoilLevel" class="form-select">
+                    <option value="0" selected>0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                  </select>
+                </div>
+                <div class="col-auto">
+                  <p>Select Days Count</p>
+                  <select class="form-select" [(ngModel)]="Count" name = "dcount">
+                    <option value="10" default>10 days</option>
+                    <option value="20">20 days</option>
+                    <option value="30">30 days</option>
+                    <option value="46">46 days</option>
+                  </select>
+                </div>
+                <div class="col-auto mt-5">
+                  <input class="btn btn-primary mt-1" type = "submit" value = "Rebuild">
+                </div>
+              </form>
+            </div> -->
+          <div class="chart-container">
+            <canvas  id="MyChart" >{{ chart }}</canvas>
+          </div>
+          </div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            <div class="chart-container" >
+              <span>Lattitude: {{latitude}}</span>&nbsp;
+              <span>Longitude: {{longitude}}</span>&nbsp;
+              <span>Site : {{site_name}}</span>
+              <canvas  id="MyChart_1" >{{ chart_1 }}</canvas>
+            </div>
+            <!-- <div class="empty-data" *ngIf="empty_data">
+              <p>Kindly click only on the marked 5 Sites</p>
+            </div> -->
+          </div>
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+            <!-- <div class="col">
+              <form class="row g-3" #useryear = "ngForm" (ngSubmit) = "onClickYears(useryear)" >
+                <div class="col-auto">
+                  <p>Select Years / Days</p>
+                  <select [(ngModel)]="Years" name = "YearCount" class="form-select">
+                    <option value="5" selected>5 Years / 1826 Days</option>
+                    <option value="10">10 Years / 3652 Days</option>
+                    <option value="15">15 Years / 5478 Days</option>
+                    <option value="20">20 Years / 7304 Days</option>
+                  </select>
+                </div>
+                <div class="col-auto mt-5">
+                  <input class="btn btn-primary mt-1" type = "submit" value = "Rebuild">
+                </div>
+              </form>
+            </div> -->
+            <div class="chart-container" >
+              <canvas  id="MyChart_2" >{{ chart_2 }}</canvas>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-mean" role="tabpanel" aria-labelledby="nav-mean-tab" tabindex="0">
+            <!-- <div class="col">
+              <form class="row g-3" #useryear_2 = "ngForm" (ngSubmit) = "onClickYears_Mean(useryear_2)" >
+                <div class="col-auto">
+                  <p>Select Years / Days</p>
+                  <select [(ngModel)]="Years_2" name = "YearCount_2" class="form-select">
+                    <option value="5" selected>5 Years / 1826 Days</option>
+                    <option value="10">10 Years / 3652 Days</option>
+                    <option value="15">15 Years / 5478 Days</option>
+                    <option value="20">20 Years / 7304 Days</option>
+                  </select>
+                </div>
+                <div class="col-auto mt-5">
+                  <input class="btn btn-primary mt-1" type = "submit" value = "Rebuild">
+                </div>
+              </form>
+            </div> -->
+            <div class="chart-container" >
+              <canvas  id="MyChart_3" >{{ chart_3 }}</canvas>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-mean-Ncar" role="tabpanel" aria-labelledby="nav-mean-Ncar-tab" tabindex="0">
+            <div class="chart-container" >
+              <canvas  id="MyChart_4" >{{ chart_4 }}</canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
